@@ -1,8 +1,9 @@
 <?php
 
-namespace App;
+namespace App\Models;
+use Illuminate\Database\Eloquent\Model;
 
-class EventsModel extends Eloquent {
+class Events extends Model {
 
 	protected $table = 'events';
     protected $primaryKey = 'name';
@@ -15,6 +16,7 @@ class EventsModel extends Eloquent {
      * @var array
      */
     protected $fillable = [
+        'name',
         'description',
     ];
 

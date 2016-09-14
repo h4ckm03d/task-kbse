@@ -1,5 +1,5 @@
 @extends('master')
-@section('title', 'Create event')
+@section('title', 'Edit event')
 
 @section('content')
     <div class="container col-md-8 col-md-offset-2">
@@ -24,7 +24,7 @@
                     <div class="form-group">
                         <label for="name" class="col-lg-2 control-label">Name</label>
                         <div class="col-lg-10">
-                            <input type="text" class="form-control" id="name" name="name" value="{!! $event->name !!}">
+                            <input type="text" class="form-control" id="name" name="name" value="{!! $event->name !!}" disabled>
                         </div>
                     </div>
                     <div class="form-group">
@@ -37,7 +37,7 @@
                     <div class="form-group">
                         <div class="col-lg-10 col-lg-offset-2">
                             <a href="/events" class="btn btn-default">Cancel</a>
-                            <button type="submit" class="btn btn-primary">Save</button>
+                            <button type="submit" class="btn btn-primary">Update</button>
                         </div>
                     </div>
                 </fieldset>

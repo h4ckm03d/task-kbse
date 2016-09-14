@@ -1,38 +1,43 @@
-@section('main')
+@extends('master')
+@section('title', 'View all events')
+@section('content')
 
-<h1>All Events</h1>
+    <div class="container col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2> Events </h2>
+                </div>
+                <a href="/events/create" class="btn btn-primary">Add</a>
+                @if ($events->isEmpty())
+                    <p> There is no Events.</p>
+                @else
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($events as $event)
+                                <tr>
+                                    <td>{!! $event->name !!}</td>
+                                    <td>{!! $event->description !!}</td>
+                                    <td><a href={!! action('EventsController@edit', ['name' => $event->name]) !!} class="btn btn-info btn-xs">Edit</a>
+                                        <form method="post" action="{!! action('EventsController@destroy', $event->name) !!}" class="pull-left">
+                                            <input type="hidden" name="_token" value="{!! csrf_token() !!}">
+                                                <div>
+                                                    <button type="submit" class="btn btn-warning btn-xs">Delete</button>
+                                                </div>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                @endif
+            </div>
+    </div>
 
-<p>{{ link_to_route('events.create', 'Add new event') }}</p>
-
-@if ($events->count())
-    <table class="table table-striped table-bordered">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Description</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            @foreach ($events as $event)
-                <tr>
-                    <td>{{ $event->name }}</td>
-                    <td>{{ $event->description }}</td>
-                    <td>{{ link_to_route('events.edit', 'Edit', array($event->id), array('class' => 'btn btn-info')) }}</td>
-                    <td>
-          {{ Form::open(array('method' 
-=> 'DELETE', 'route' => array('events.destroy', $event->id))) }}                       
-                            {{ Form::submit('Delete', array('class' => 'btn btn-danger')) }}
-                        {{ Form::close() }}
-                    </td>
-                </tr>
-            @endforeach
-              
-        </tbody>
-      
-    </table>
-@else
-    There are no events
-@endif
-
-@stop
+@endsection
