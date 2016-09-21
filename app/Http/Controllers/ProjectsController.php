@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
+use App\Models\Project;
+use App\Http\Requests\ProjectsRequest;
 
 class ProjectsController extends Controller
 {
@@ -15,7 +14,8 @@ class ProjectsController extends Controller
      */
     public function index()
     {
-        //
+       $project = Project::all();
+       return view('project.index', compact('project'));
     }
 
     /**
@@ -25,7 +25,8 @@ class ProjectsController extends Controller
      */
     public function create()
     {
-        //
+        $project = new Project;
+        return view('project.edit', compact('project'));
     }
 
     /**
@@ -34,9 +35,13 @@ class ProjectsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProjectsRequest $request)
     {
-        //
+        $project = new Project;
+        $project->name = $request->name;
+        $project->fill($project->getFillable());
+        $project->save();
+        return redirect("/project")->with('success_message', 'The project has been successfully saved.');
     }
 
     /**
@@ -58,7 +63,8 @@ class ProjectsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $project = Project::findOrFail($id);
+        return view('project.edit', compact('project'));
     }
 
     /**
@@ -68,9 +74,13 @@ class ProjectsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProjectsRequest $request, $id)
     {
-        //
+        $project = Project::findOfFail($id);
+        $project->name = $request->name;
+        $project->fill($project->getFillable());
+        $project->save();
+        return redirect(action('ProjectsController@edit', $project->name))->with('status', 'The project '.$id.' has been updated!');
     }
 
     /**
@@ -81,6 +91,7 @@ class ProjectsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Project::findOrFail($id)->delete();
+        return redirect('/project')->with('status', 'The project '.$id.' has been deleted!');
     }
 }
