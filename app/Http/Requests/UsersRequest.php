@@ -13,7 +13,7 @@ class UsersRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,7 @@ class UsersRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name'=> 'required|unique:users|max:255|min:3'
         ];
     }
 }

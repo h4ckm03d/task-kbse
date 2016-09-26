@@ -16,17 +16,17 @@ class Point extends Model
      */
     public function location()
     {
-        return $this->belongsTo('App\Models\Location');
+        return $this->belongsTo('App\Models\Location', 'location_id', 'id');
     }
 
     public function user()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo('App\Models\User','user_id', 'id');
     }
 
     public function project()
     {
-        return $this->belongsTo('App\Models\Project');
+        return $this->belongsTo('App\Models\Project',"project_id","id");
     }
 
     public function event()

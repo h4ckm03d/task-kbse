@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Project;
-use App\Http\Requests\ProjectsRequest;
+use App\Models\Location;
+use App\Http\Requests\LocationsRequest;
 
-class ProjectsController extends Controller
+class LocationsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class ProjectsController extends Controller
      */
     public function index()
     {
-       $projects = Project::all();
-       return view('project.index', compact('projects'));
+       $locations = Location::all();
+       return view('location.index', compact('locations'));
     }
 
     /**
@@ -25,8 +25,8 @@ class ProjectsController extends Controller
      */
     public function create()
     {
-        $project = new Project;
-        return view('project.edit', compact('project'));
+        $location = new Location;
+        return view('location.edit', compact('location'));
     }
 
     /**
@@ -35,13 +35,13 @@ class ProjectsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProjectsRequest $request)
+    public function store(LocationsRequest $request)
     {
-        $project = new Project;
-        $project->name = $request->name;
-        $project->fill($project->getFillable());
-        $project->save();
-        return redirect("/projects")->with('success_message', 'The project has been successfully saved.');
+        $location = new Location;
+        $location->name = $request->name;
+        $location->fill($location->getFillable());
+        $location->save();
+        return redirect("/locations")->with('success_message', 'The location has been successfully saved.');
     }
 
     /**
@@ -63,8 +63,8 @@ class ProjectsController extends Controller
      */
     public function edit($id)
     {
-        $project = Project::findOrFail($id);
-        return view('project.edit', compact('project'));
+        $location = Location::findOrFail($id);
+        return view('location.edit', compact('location'));
     }
 
     /**
@@ -74,13 +74,13 @@ class ProjectsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id, ProjectsRequest $request)
+    public function update($id, LocationsRequest $request)
     {
-        $project = Project::firstOrFail($id);
-        $project->name = $request->name;
-        $project->fill($project->getFillable());
-        $project->save();
-        return redirect(action('ProjectsController@edit', $project->id))->with('status', 'The project '.$id.' has been updated!');
+        $location = Location::findOrFail($id);
+        $location->name = $request->name;
+        $location->fill($location->getFillable());
+        $location->save();
+        return redirect(action('LocationsController@edit', $location->id))->with('status', 'The location '.$id.' has been updated!');
     }
 
     /**
@@ -91,7 +91,7 @@ class ProjectsController extends Controller
      */
     public function destroy($id)
     {
-        Project::findOrFail($id)->delete();
-        return redirect('/projects')->with('status', 'The project '.$id.' has been deleted!');
+        Location::findOrFail($id)->delete();
+        return redirect('/locations')->with('status', 'The location '.$id.' has been deleted!');
     }
 }

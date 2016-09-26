@@ -22,8 +22,9 @@
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="/events">Events</a></li>
                         <li><a href="/projects">Project</a></li>
-                        <li><a href="/location">Location</a></li>
+                        <li><a href="/locations">Location</a></li>
                         <li><a href="/points">Points</a></li>
+                        <li><a href="/users">Users</a></li>
                     </ul>
                 </li>
             </ul>

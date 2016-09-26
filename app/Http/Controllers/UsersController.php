@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
+use App\Models\User;
+use App\Http\Requests\UsersRequest;
 
 class UsersController extends Controller
 {
@@ -15,7 +14,8 @@ class UsersController extends Controller
      */
     public function index()
     {
-        //
+       $users = User::all();
+       return view('user.index', compact('users'));
     }
 
     /**
@@ -25,7 +25,8 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
+        $user = new User;
+        return view('user.edit', compact('user'));
     }
 
     /**
@@ -34,9 +35,13 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UsersRequest $request)
     {
-        //
+        $user = new User;
+        $user->name = $request->name;
+        $user->fill($user->getFillable());
+        $user->save();
+        return redirect("/users")->with('success_message', 'The user has been successfully saved.');
     }
 
     /**
@@ -58,7 +63,8 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::findOrFail($id);
+        return view('user.edit', compact('user'));
     }
 
     /**
@@ -68,9 +74,13 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UsersRequest $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->name = $request->name;
+        $user->fill($user->getFillable());
+        $user->save();
+        return redirect(action('UsersController@edit', $user->id))->with('status', 'The user '.$id.' has been updated!');
     }
 
     /**
@@ -81,6 +91,7 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::findOrFail($id)->delete();
+        return redirect('/users')->with('status', 'The user '.$id.' has been deleted!');
     }
 }

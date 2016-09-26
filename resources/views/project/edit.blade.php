@@ -1,5 +1,9 @@
 @extends('master')
-@section('title', 'Create event')
+@if ($project->id)
+@section('title', 'Edit project')
+@else
+@section('title', 'Create project')
+@endif
 
 @section('content')
     <div class="container col-md-8 col-md-offset-2">
@@ -20,23 +24,27 @@
                 <input type="hidden" name="_token" value="{!! csrf_token() !!}">
 
                 <fieldset>
-                    <legend>Create event</legend>
+                    @if ($project->id)
+                    <legend>Edit project</legend>
+                      <div class="form-group">
+                        <label for="id" class="col-lg-2 control-label">Id</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" id="id" name="id" value="{!! $project->id !!}" disabled>
+                        </div>
+                    </div>
+                    @else
+                    <legend>Create project</legend>
+                    @endif
                     <div class="form-group">
                         <label for="name" class="col-lg-2 control-label">Name</label>
                         <div class="col-lg-10">
-                            <input type="text" class="form-control" id="name" name="name" value="{!! $event->name !!}">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="description" class="col-lg-2 control-label">Description</label>
-                        <div class="col-lg-10">
-                            <textarea class="form-control" rows="3" id="description" name="description">{!! $event->description !!}</textarea>
+                            <input type="text" class="form-control" id="name" name="name" value="{!! $project->name !!}">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-lg-10 col-lg-offset-2">
-                            <a href="/events" class="btn btn-default">Cancel</a>
+                            <a href="/projects" class="btn btn-default">Cancel</a>
                             <button type="submit" class="btn btn-primary">Save</button>
                         </div>
                     </div>
