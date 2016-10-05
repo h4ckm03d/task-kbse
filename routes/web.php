@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'PagesController@home');
+Route::get('/', 'PointsController@index');
 Route::get('/about', 'PagesController@about');
 
 Route::get('/events', 'EventsController@index');
@@ -41,3 +41,10 @@ Route::post('/projects/create', 'ProjectsController@store');
 Route::get('/projects/{id?}/edit', 'ProjectsController@edit');
 Route::post('/projects/{id?}/edit', 'ProjectsController@update');
 Route::post('/projects/{id?}/delete', 'ProjectsController@destroy');
+
+Route::get('/points', 'PointsController@index');
+Route::get('/points/create', 'PointsController@create');
+Route::post('/points/create', 'PointsController@store');
+Route::get('/points/{id?}/edit', 'PointsController@edit');
+Route::post('/points/{id?}/edit', 'PointsController@update');
+Route::post('/points/{id?}/delete', 'PointsController@destroy');

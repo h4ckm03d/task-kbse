@@ -9,7 +9,7 @@
                 </div>
                 <a href="/locations/create" class="btn btn-primary">Add</a>
                 @if ($locations->isEmpty())
-                    <p> There is no Locations.</p>
+                    <p class="empty"> There is no Locations.</p>
                 @else
                     <table class="table">
                         <thead>

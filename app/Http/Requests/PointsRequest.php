@@ -24,7 +24,12 @@ class PointsRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=> 'required'
+            'event_name'=> 'required',
+            'longitude'=> 'required',
+            'latitude'=> 'required',
+            'user_id'=> 'required',
+            'project_id'=> 'required',
+            'location_id'=> 'required'
         ];
     }
 }

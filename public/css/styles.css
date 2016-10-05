@@ -1,3 +1,7 @@
 #map {
     height: 480px;
 }
+
+p.empty{
+    margin-left: 10px;
+}

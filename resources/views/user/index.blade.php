@@ -9,7 +9,7 @@
                 </div>
                 <a href="/users/create" class="btn btn-primary">Add</a>
                 @if ($users->isEmpty())
-                    <p> There is no Projects.</p>
+                    <p class="empty"> There is no Projects.</p>
                 @else
                     <table class="table">
                         <thead>

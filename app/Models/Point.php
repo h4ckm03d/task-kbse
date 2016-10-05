@@ -10,6 +10,17 @@ class Point extends Model
     protected $primaryKey = 'id';
 	public $timestamps = true;
     public $incrementing = false;
+    protected $fillable = [
+        // 'id',
+        'date',
+        'time',
+        'project_id',
+        'location_id',
+        'user_id',
+        // 'event_name',
+        'longitude',
+        'latitude'
+    ];
 
      /**
      * Get the locations

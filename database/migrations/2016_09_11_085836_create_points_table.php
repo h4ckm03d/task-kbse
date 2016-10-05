@@ -12,6 +12,7 @@ class CreatePointsTable extends Migration {
 			$table->timestamps();
 			$table->date('date');
 			$table->time('time');
+			$table->string('location',255);
 			$table->decimal('longitude');
 			$table->decimal('latitude');
 			$table->integer('user_id')->unsigned();

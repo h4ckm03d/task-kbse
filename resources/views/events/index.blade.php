@@ -9,7 +9,7 @@
                 </div>
                 <a href="/events/create" class="btn btn-primary">Add</a>
                 @if ($events->isEmpty())
-                    <p> There is no Events.</p>
+                    <p class="empty"> There is no Events.</p>
                 @else
                     <table class="table">
                         <thead>

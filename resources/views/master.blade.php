@@ -33,5 +33,7 @@
         $.material.init();
     });
 </script>
+
+@yield('scripts')
 </body>
 </html>
